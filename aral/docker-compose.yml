@@ -1,0 +1,7 @@
+services:
+  app:
+    image: doublelayer/aral_scraper:latest
+    container_name: aral_scraper
+    command: python __init__.py
+    env_file:
+      - .env

@@ -1,0 +1,7 @@
+services:
+  app:
+    image: doublelayer/schenefelder-bote:latest
+    container_name: schenefelder-bote
+    command: python __init__.py
+    env_file:
+      - .env

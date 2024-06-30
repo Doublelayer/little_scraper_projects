@@ -31,6 +31,7 @@ def get_sprit_price():
     }
     response = requests.request("GET", url, headers=headers, data=payload, allow_redirects=False)
     json_ = json.loads(response.text)["data"]
+
     return {
         "title": "Aktueller Preis Ultimate Diesel: " + json_.get("prices").get("F00426"),
         "last_price_update": json_.get("last_price_update")

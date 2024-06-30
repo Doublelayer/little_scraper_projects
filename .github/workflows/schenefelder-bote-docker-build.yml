@@ -4,6 +4,7 @@ on:
     branches: [ main ]
     paths:
       - schenefelder-bote/**
+      - Dockerfile_Schnefelder
 jobs:   
   build:    
     runs-on: ubuntu-latest    
@@ -33,4 +34,4 @@ jobs:
       name: Run Buildx (push image)      
       if: success()      
       run: |        
-        docker buildx build --platform linux/arm/v7 --tag doublelayer/schenefelder-bote:latest --file ./schenefelder-bote/Dockerfile_Schnefelder --output type=image,push=true .
+        docker buildx build --platform linux/arm/v7 --tag doublelayer/schenefelder-bote:latest --file ./Dockerfile_Schenefelder --output type=image,push=true .

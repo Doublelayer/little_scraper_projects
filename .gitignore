@@ -1,5 +1,5 @@
 **/.env
-db/*.txt
+**/db/*.txt
 
 # Editors
 .vscode/

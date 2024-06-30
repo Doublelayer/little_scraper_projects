@@ -3,5 +3,7 @@ services:
     image: doublelayer/schenefelder-bote:latest
     container_name: schenefelder-bote
     command: python __init__.py
+    volumes:
+      - schenefelder-bote.txt:.
     env_file:
       - .env

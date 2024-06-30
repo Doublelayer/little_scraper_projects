@@ -20,7 +20,7 @@ def send_notification(url_):
 
     msg = po.msg(f"Der neue Schenefelder Bote: {url_}")
 
-    msg.set_data(po_params.TITLE, url_.split("/")[:-1])
+    msg.set_data(po_params.TITLE, url_.split("/")[-1])
 
     po.send(msg)
 

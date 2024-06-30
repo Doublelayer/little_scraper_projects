@@ -33,5 +33,4 @@ jobs:
       name: Run Buildx (push image)      
       if: success()      
       run: |        
-        cd ..
-        docker buildx build --platform linux/arm/v7 --tag doublelayer/schenefelder-bote:latest --file ./schenefelder-bote/Dockerfile --output type=image,push=true .
+        docker buildx build --platform linux/arm/v7 --tag doublelayer/schenefelder-bote:latest --file ./schenefelder-bote/Dockerfile_Schnefelder --output type=image,push=true .

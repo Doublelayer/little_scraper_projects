@@ -3,7 +3,7 @@ FROM python:3.10-slim
 WORKDIR /
 
 COPY aral .
-COPY ../pushover .
+COPY pushover .
 
 RUN pip install -r requirements.txt
 

@@ -33,5 +33,4 @@ jobs:
       name: Run Buildx (push image)      
       if: success()      
       run: |        
-        cd ..
-        docker buildx build --platform linux/arm/v7 --tag doublelayer/aral_scraper:latest --file ./aral/Dockerfile --output type=image,push=true .
+        docker buildx build --platform linux/arm/v7 --tag doublelayer/aral_scraper:latest --file ./aral/Dockerfile_Aral --output type=image,push=true .

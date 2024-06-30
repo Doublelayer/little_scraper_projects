@@ -4,7 +4,7 @@ on:
     branches: [ main ]
     paths:
       - schenefelder-bote/**
-      - Dockerfile_Schnefelder
+      - Dockerfile_Schenefelder
 jobs:   
   build:    
     runs-on: ubuntu-latest    

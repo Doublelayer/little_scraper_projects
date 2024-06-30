@@ -29,6 +29,7 @@ def get_sprit_price():
         'accept-language': 'de-DE,de;q=0.7',
         'cache-control': 'max-age=0'
     }
+
     response = requests.request("GET", url, headers=headers, data=payload, allow_redirects=False)
     json_ = json.loads(response.text)["data"]
 

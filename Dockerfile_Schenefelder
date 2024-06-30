@@ -4,6 +4,7 @@ WORKDIR /app
 
 COPY db /app/db
 COPY pushover /app/pushover
+COPY soup /app/soup
 COPY schenefelder-bote /app/.
 
 RUN pip install -r requirements.txt

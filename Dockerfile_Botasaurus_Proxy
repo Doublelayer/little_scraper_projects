@@ -1,5 +1,5 @@
 # Use an official Python runtime as a parent image
-FROM python:3.12-nodejs18-slim
+FROM python:3.10-slim
 
 WORKDIR /app
 

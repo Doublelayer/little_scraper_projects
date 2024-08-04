@@ -12,20 +12,8 @@ RUN apt-get update && apt-get install -y \
     ca-certificates \
     x11-utils xdg-utils xvfb \
     software-properties-common \
+    chromium-browser \
     && rm -rf /var/lib/apt/lists/*
-
-RUN curl -Lo "/tmp/chromedriver.zip" "https://chromedriver.storage.googleapis.com/114.0.5735.90/chromedriver_linux64.zip" && \
-    curl -Lo "/tmp/chrome-linux.zip" "https://www.googleapis.com/download/storage/v1/b/chromium-browser-snapshots/o/Linux_x64%2F1135561%2Fchrome-linux.zip?alt=media" && \
-    unzip /tmp/chromedriver.zip -d /opt/ && \
-    unzip /tmp/chrome-linux.zip -d /opt/
-
-RUN cp -r /opt/chrome-linux /opt/chrome
-
-# Add the Chrome as a path variable
-ENV CHROME_BIN=/usr/bin/google-chrome
-
-# Check if Chrome was installed successfully
-# RUN google-chrome --version
 
 COPY botasaurus-proxy /app/.
 

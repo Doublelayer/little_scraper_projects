@@ -22,7 +22,7 @@ RUN curl -Lo "/tmp/chromedriver.zip" "https://chromedriver.storage.googleapis.co
 RUN cp -r /opt/chrome-linux /opt/chrome
 
 # Add the Chrome as a path variable
-#ENV CHROME_BIN=/usr/bin/google-chrome
+ENV CHROME_BIN=/usr/bin/google-chrome
 
 # Check if Chrome was installed successfully
 # RUN google-chrome --version

@@ -13,18 +13,22 @@ RUN apt-get update && apt-get install -y \
     software-properties-common \
     && rm -rf /var/lib/apt/lists/*
 
-RUN yum install -y unzip && \
-    curl -Lo "/tmp/chromedriver.zip" "https://chromedriver.storage.googleapis.com/114.0.5735.90/chromedriver_linux64.zip" && \
-    curl -Lo "/tmp/chrome-linux.zip" "https://www.googleapis.com/download/storage/v1/b/chromium-browser-snapshots/o/Linux_x64%2F1135561%2Fchrome-linux.zip?alt=media" && \
-    unzip /tmp/chromedriver.zip -d /opt/ && \
-    unzip /tmp/chrome-linux.zip -d /opt/
+# installing google-chrome-stable
+RUN apt-get install -y gnupg wget curl unzip --no-install-recommends; \
+    wget -q -O - https://dl-ssl.google.com/linux/linux_signing_key.pub | \
+    gpg --no-default-keyring --keyring gnupg-ring:/etc/apt/trusted.gpg.d/google.gpg --import; \
+    chmod 644 /etc/apt/trusted.gpg.d/google.gpg; \
+    echo "deb https://dl.google.com/linux/chrome/deb/ stable main" >> /etc/apt/sources.list.d/google.list; \
+    apt-get update -y; \
+    apt-get install -y google-chrome-stable;
 
-RUN yum install atk cups-libs gtk3 libXcomposite alsa-lib \
-    libXcursor libXdamage libXext libXi libXrandr libXScrnSaver \
-    libXtst pango at-spi2-atk libXt xorg-x11-server-Xvfb \
-    xorg-x11-xauth dbus-glib dbus-glib-devel tzdata -y
-
-RUN cp -r /opt/chrome-linux /opt/chrome
+# installing chromedriver
+RUN CHROMEDRIVER_VERSION=$(curl https://googlechromelabs.github.io/chrome-for-testing/LATEST_RELEASE_STABLE); \
+    wget -N https://storage.googleapis.com/chrome-for-testing-public/$CHROMEDRIVER_VERSION/linux64/chromedriver-linux64.zip -P ~/ && \
+    unzip ~/chromedriver-linux64.zip -d ~/ && \
+    rm ~/chromedriver-linux64.zip && \
+    mv -f ~/chromedriver-linux64/chromedriver /usr/bin/chromedriver && \
+    rm -rf ~/chromedriver-linux64
 
 # Add the Chrome as a path variable
 ENV CHROME_BIN=/usr/bin/google-chrome

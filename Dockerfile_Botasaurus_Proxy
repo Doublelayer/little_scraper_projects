@@ -18,7 +18,7 @@ RUN rm -rf /var/lib/apt/lists/*
 
 RUN cp -r /opt/chrome-linux /opt/chrome
 
-COPY requirements.txt ./
+COPY requirements.txt ./app
 RUN pip install -r requirements.txt
 
 # USER gitpod

@@ -1,0 +1,4 @@
+botasarus-proxy:
+  image: mysql:5.7
+  ports:
+    - 5000:5000

@@ -6,7 +6,7 @@ from flask import Flask, request
 
 
 @browser(
-    headless=False,
+    headless=True,
     block_images=False,
     reuse_driver=True
 )

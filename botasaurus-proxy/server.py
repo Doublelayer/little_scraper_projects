@@ -33,4 +33,4 @@ def get():
     return scrape_html(request.args.get('url'))
 
 
-app.run(debug=False, port=5000)
+app.run(debug=False, host="0.0.0.0", port=5000)

@@ -19,11 +19,6 @@ RUN curl -Lo "/tmp/chromedriver.zip" "https://chromedriver.storage.googleapis.co
     unzip /tmp/chromedriver.zip -d /opt/ && \
     unzip /tmp/chrome-linux.zip -d /opt/
 
-RUN apt-get install -y atk cups-libs gtk3 libXcomposite alsa-lib \
-    libXcursor libXdamage libXext libXi libXrandr libXScrnSaver \
-    libXtst pango at-spi2-atk libXt xorg-x11-server-Xvfb \
-    xorg-x11-xauth dbus-glib dbus-glib-devel tzdata -y
-
 RUN cp -r /opt/chrome-linux /opt/chrome
 
 # Add the Chrome as a path variable

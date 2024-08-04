@@ -31,5 +31,4 @@ COPY botasaurus-proxy /app/.
 
 RUN pip install --no-cache-dir -r requirements.txt
 
-
 CMD ["python", "server.py"]

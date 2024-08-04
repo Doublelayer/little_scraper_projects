@@ -14,13 +14,13 @@ def scrape_html(driver: Driver, url):
     driver.google_get(url)
 
     time.sleep(1)
-    # cookies_ = driver.get_cookies_dict()
-    # now = time.time()
-    # while not cookies_.get("eveD"):
-    #     time.sleep(0.5)
-    #     cookies_ = driver.get_cookies_dict()
-    #     if time.time() - now > Wait.VERY_LONG:
-    #         raise ElementWithSelectorNotFoundException("cookie 'eveD' not found")
+    cookies_ = driver.get_cookies_dict()
+    now = time.time()
+    while not cookies_.get("eveD"):
+        time.sleep(0.5)
+        cookies_ = driver.get_cookies_dict()
+        if time.time() - now > Wait.VERY_LONG:
+            raise ElementWithSelectorNotFoundException("cookie 'eveD' not found")
 
     return driver.page_html
 

@@ -16,8 +16,7 @@ RUN wget -q -O - https://dl-ssl.google.com/linux/linux_signing_key.pub | apt-key
     && echo "deb http://ftp.de.debian.org/debian sid main" >> /etc/apt/sources.list
 
 # Install Google Chrome
-RUN apt-get install -y chromium \
-    && rm -rf /var/lib/apt/lists/*
+RUN apt-get install -y chromium_126.0.6478.182-1_armhf.deb
 
 # USER gitpod
 

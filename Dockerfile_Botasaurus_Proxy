@@ -1,4 +1,4 @@
-FROM doublelayer/docker-python-nodejs:python3.10-slim
+FROM doublelayer/docker-python-nodejs
 
 WORKDIR /app
 
@@ -9,7 +9,7 @@ RUN apt-get install -y chromium chromium-driver
 # USER gitpod
 
 # Add the Chrome as a path variable
-ENV CHROME_BIN=/opt/chrome
+ENV CHROME_BIN=/usr/bin/chromium
 
 COPY botasaurus-proxy /app/.
 

@@ -1,22 +1,17 @@
-FROM doublelayer/docker-python-nodejs
+FROM arm32v7/python:3.12
 
-# Install Chrome dependencies
+# Setze Umgebungsvariablen
+ENV DEBIAN_FRONTEND=noninteractive
+ENV TZ=Etc/UTC
+
+# Aktualisiere Paketliste und installiere Abhängigkeiten
 RUN apt-get update && apt-get install -y \
-    wget \
-    gnupg2 \
-    lsof \
-    apt-transport-https \
-    ca-certificates \
-    x11-utils xdg-utils xvfb \
-    software-properties-common \
-    && rm -rf /var/lib/apt/lists/*
+    chromium-browser \
+    --no-install-recommends
 
-# Add the Google Chrome repository
-RUN wget -q -O - https://dl-ssl.google.com/linux/linux_signing_key.pub | apt-key add - \
-    && echo "deb http://ftp.de.debian.org/debian sid main" >> /etc/apt/sources.list
-
-# Install Google Chrome
-RUN apt-get install -y chromium_126.0.6478.182-1_armhf.deb
+# Bereinigen, um das Image klein zu halten
+RUN apt-get clean && \
+    rm -rf /var/lib/apt/lists/*
 
 # USER gitpod
 

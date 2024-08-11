@@ -1,5 +1,14 @@
-FROM python:3.10-buster
+FROM doublelayer/docker-python-nodejs:python3.12-nodejs18-slim
 
+RUN apt-get update && apt-get install -y \
+    wget \
+    gnupg2 \
+    lsof \
+    apt-transport-https \
+    ca-certificates \
+    x11-utils xdg-utils xvfb \
+    software-properties-common \
+    && rm -rf /var/lib/apt/lists/* \
 
 WORKDIR /app
 
@@ -14,7 +23,6 @@ ENV CHROME_BIN=/opt/chrome
 
 COPY botasaurus-proxy /app/.
 
-RUN pip install --upgrade pip
 RUN pip install --no-cache-dir -r requirements.txt
 
 CMD ["python", "server.py"]

@@ -1,12 +1,22 @@
 FROM doublelayer/docker-python-nodejs
 
+# Install Chrome dependencies
+RUN apt-get update && apt-get install -y \
+    wget \
+    gnupg2 \
+    lsof \
+    apt-transport-https \
+    ca-certificates \
+    x11-utils xdg-utils xvfb \
+    software-properties-common \
+    && rm -rf /var/lib/apt/lists/*
 
 # Add the Google Chrome repository
 RUN wget -q -O - https://dl-ssl.google.com/linux/linux_signing_key.pub | apt-key add - \
     && echo "deb http://ftp.de.debian.org/debian sid main" >> /etc/apt/sources.list
 
 # Install Google Chrome
-RUN apt-get update && apt-get install -y chromium \
+RUN apt-get install -y chromium \
     && rm -rf /var/lib/apt/lists/*
 
 # USER gitpod

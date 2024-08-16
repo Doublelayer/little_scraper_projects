@@ -17,14 +17,11 @@ RUN ln -s /usr/bin/python3 /usr/bin/python
 ENV CHROME_BIN=/usr/bin/chromium-browser
 ENV DISPLAY=:0
 
-# Beispiel: Installieren einer Python-Bibliothek
-RUN pip3 install --no-cache-dir selenium
-
 # Arbeitsverzeichnis setzen
 WORKDIR /usr/src/app
 
 # Beispiel: Kopieren einer Python-Anwendung ins Image
-COPY . .
+COPY botasaurus-proxy .
 
 # Add the Chrome as a path variable
 ENV CHROME_BIN=/usr/bin/chromium

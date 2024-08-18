@@ -1,18 +1,31 @@
-FROM doublelayer/docker-python-nodejs
+FROM arm32v7/python:3.12
 
-WORKDIR /app
+# Setze Umgebungsvariablen
+ENV DEBIAN_FRONTEND=noninteractive
+ENV TZ=Etc/UTC
 
-# Install Chrome dependencies
-RUN apt-get -y update
-RUN apt-get install -y chromium chromium-driver
+# Aktualisiere Paketliste und installiere Abhängigkeiten
+RUN apt-get update && apt-get install -y \
+    chromium-browser \
+    --no-install-recommends
+
+# Bereinigen, um das Image klein zu halten
+RUN apt-get clean && \
+    rm -rf /var/lib/apt/lists/*
 
 # USER gitpod
 
 # Add the Chrome as a path variable
-ENV CHROME_BIN=/usr/bin/chromium
+#ENV CHROME_BIN=/usr/bin/google-chrome
+
+
+# Check if Chrome was installed successfully
+# RUN google-chrome --version
+
+WORKDIR /app
 
 COPY botasaurus-proxy /app/.
 
-RUN pip install -r requirements.txt
+RUN pip install --no-cache-dir -r requirements.txt
 
 CMD ["python", "server.py"]

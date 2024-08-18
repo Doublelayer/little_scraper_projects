@@ -26,7 +26,7 @@ def get_immoscout_cookies(driver: Driver, url):
         if time.time() - now > Wait.VERY_LONG:
             raise ElementWithSelectorNotFoundException("cookie 'eveD' not found")
 
-    return driver.get_cookies_dict()
+    return driver.page_html
 
 
 app = Flask(__name__)

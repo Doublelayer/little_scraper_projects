@@ -1,31 +1,29 @@
-FROM arm32v7/python:3.12
-
-# Setze Umgebungsvariablen
-ENV DEBIAN_FRONTEND=noninteractive
-ENV TZ=Etc/UTC
-
-# Aktualisiere Paketliste und installiere Abhängigkeiten
+# Basisimage für Raspberry Pi mit Python und minimalen Tools
+FROM balenalib/raspberry-pi-debian:bullseye
+# Installieren von Updates und benötigten Paketen
 RUN apt-get update && apt-get install -y \
+    python3 \
+    python3-pip \
     chromium-browser \
-    --no-install-recommends
-
-# Bereinigen, um das Image klein zu halten
-RUN apt-get clean && \
+    --no-install-recommends && \
+    apt-get clean && \
     rm -rf /var/lib/apt/lists/*
+# Standard-Python-Version verlinken (optional)
+RUN ln -s /usr/bin/python3 /usr/bin/python
+# Chromium-Umgebung konfigurieren
+ENV CHROME_BIN=/usr/bin/chromium-browser
+ENV DISPLAY=:0
 
-# USER gitpod
+# Beispiel: Installieren einer Python-Bibliothek
+RUN pip3 install --no-cache-dir selenium
+
+# Arbeitsverzeichnis setzen
+WORKDIR /usr/src/app
+
+# Beispiel: Kopieren einer Python-Anwendung ins Image
+COPY . .
 
 # Add the Chrome as a path variable
-#ENV CHROME_BIN=/usr/bin/google-chrome
-
-
-# Check if Chrome was installed successfully
-# RUN google-chrome --version
-
-WORKDIR /app
-
-COPY botasaurus-proxy /app/.
-
-RUN pip install --no-cache-dir -r requirements.txt
-
+ENV CHROME_BIN=/usr/bin/chromium
+RUN pip install -r requirements.txt
 CMD ["python", "server.py"]
